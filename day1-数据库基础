@@ -1,0 +1,32 @@
+一.MySQL登录和退出
+	方式一：通过mysql自带的客户端，仅限于root用户
+	方式二：通过终端：mysql [-h主机名 -P端口号] -u用户名 -p密码
+
+	退出：exit或ctrl+c
+二.MySQL基本命令
+	1.显示数据库
+	show databases;
+	2.打开数据库
+	use 库名;
+	3.显示库名;
+	select database();
+	4.显示表名
+	show tables;
+	5.创建库
+	create database 库名 charset=utf8;
+	6.删除库
+	drop database 库名;
+	7.创建表
+	create table 表名(字段1 数据类型1,字段2 数据类型2,...);
+	8.删除表
+	drop database 表名;
+	9.查看数据库版本
+	第一种：终端下mysql --version或者mysql -V
+	第二种：登录到mysql服务端select version();
+	10.查看表结构
+	desc 表名;
+三.MySQL的语法规范
+	1.不区分大小写，建议关键字大写，表名，列名小写
+	2.每条命令用分号结尾
+	3.每条命令根据需要，可以进行缩进，或换行
+	
