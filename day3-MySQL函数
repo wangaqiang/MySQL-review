@@ -1,1 +1,160 @@
-一.
+一.MySQL函数
+	分为数学函数，字符串函数，日期和时间函数，条件判断函数，系统信息函数和加密函数
+二.数学函数
+	主要用来处理数值数据，主要有绝对值函数、三角函数、对数函数、随机函数等，再有错误产生时，数学函数将返回NULL
+	1.绝对值函数ABS(x)和返回圆周率的函数PI()
+	ABS(X)返回x的绝对值
+	PI()返回圆周率的值，默认的显示小数位数是6位。
+	2.平方根函数SQRT()和求余函数MOD(x,y)
+	SQRT(x)返回非负数x的二次方根，负数返回NULL
+	MOD(x,y)返回x除以y后的余数
+	3.获取整数的函数CEIL(x)、CEILING(X)和FLOOR(x)
+	前两个意义相同，返回不小于x的最小整数值CEIL(-3.35) = -3 
+	FLOOR(X)返回不大于x的最大整数值FLOOR(-3.35) = -4
+	4.获取随机数的函数RAND()和RAND(X)
+	RAND()返回的是0——1之间的随机小数，当指定x后返回根据x产生的0-1之间的小数，每个x对应一个小数，不同的x对应的值不同
+	5.函数ROUND(X),ROUND(X,Y)和TRUNCATE(X,Y)
+	ROUND(X)返回最接近于参数x的整数，对x值进行四舍五入。
+	ROUND(X,Y)返回最接近与x的数，其值保留到小数点后Y位，若Y为负值，则将保留X值到小数电左边Y位例如：ROUND(232.38,-2) = 200
+	TRUNCATE(X,Y)返回被舍去小数点后Y位的数字x。若y为0,则直接没有小数。与上面类似
+	注意：上面两个Y值为负数时，不进行四舍五入都直接用0.
+	6.符号函数SIGN(X)
+	返回参数的符号x为负，零，正依次返回-1,0,1
+	7.幂运算函数POW(X,Y),POWER(X,Y)和EXP(X)
+	前两个一样，返回x的y次方结果
+	EXP返回e的X次方
+	8.对数函数LOG(x)和LOG10(x)
+	返回x的自然对数，x相对于基数e的对数
+	返回x相对于基数10的对数
+	9.角度与弧度相转换的函数RADIANS(x)和DEGREES(x)
+	第一个将参数由角度转换为弧度，剩下相反
+	10.正弦函数SIN(x)和反正弦函数ASIN(x)
+	正弦函数中x为弧度值，返回正弦值
+	反正弦函数中x取值为-1至1
+	上面两个互为反函数
+	11.余弦函数COS(x)和反余弦函数ACOS(x)
+	与上面一样
+	12.正切函数、反正切函数、余切函数
+	TAN(X),ATAN(X),COT(X)与上面相同，COT和TAN互为反函数。
+
+三.字符串函数
+	主要有计算字符串长度函数，字符串合并函数，字符串替换函数，字符串比较函数，查找指定字符串函数等。
+	1.计算字符串字符数和字符长度的函数
+	CHAR_LENGTH(str)返回值为字符串str所包含的字符个数。一个多字节字符算作一个单字符。LENGTH(str)返回字符串的字节长度
+	2.合并字符串函数CONCAT(S1,S2...)、CONCAT_WS(X,S1,S2...)
+	第一个返回结果为连接参数产生的字符串，或许有一个或多个参数。任何一个参数为NULL，则返回值为NULL。如果含有二进制字符串，则返回二进制字符串。
+	第二个返回的是用x链接后面的s1,s2等，如果x为NULL，则返回NULL，如果s为NULL，忽略这个s，链接下一个s。
+	3.替换字符串的函数INSERT(s1,x,len,s2)
+	s1为原字符，x为起始位置，len为终结位置，s2为替换内容
+	如果x超过范围，返回s1.
+	若任何一个参数为NULL，则返回NULL
+	4.字母大小写转换函数
+	LOWER(STR)和LCASE(str):将字符串中的字母全部转换为小写
+	UPPER(STR)和UCASE(str):将字符串中的字母全部转换为大写
+	5.获取指定长度的字符串的函数LEFT(S,N)和RIGHT(s,n)
+	返回s字符串左边开始数的N个字符
+	返回s字符串右边开始数的N个字符
+	6.填充字符串的函数LPAD(s1,len,s2)和RPAD(s1,len,s2)
+	LPAD若s1的长度大于len，则截取len个返回，若小于则在s1的左边填充s2，使得s1+s2=len。RPAD与LPAD相反，是在右边而已。
+	7.删除两侧空格的函数LTRIMS(S),RTRIMS(S),TRIMS(S)，和删除两端的指定字符串的函数TRIM(s1 from s)
+	8.重复生成字符串的函数REPEAT(S,N)返回一个由重复的字符串s组成的字符串，字符串s的数目等于N，若N小于等于0,则返回一个空字符串，若s或N为NULL，则返回NULL。
+	9.空格函数SPACE(N)和替换函数REPLACE(S,S1,S2)
+	前者返回由n个空格组成的字符串，后者返回的是由s2替换掉s中的所有s1的字符串
+	10.比较字符串大小的函数STRCMP(S1,S2)
+	若所有字符串均相同，则返回0,若第一个参数小于第二个返回-1,否则返回1.
+	11.获取子串的函数SUBSTRING(S,N,LEN)和MID(s,n,len)
+	返回一个从N开始的字符串，n>0则正向，否则反向。len为返回值的字符数。
+	MID(S,N,LEN)与上面作用相同
+	注意：如果LEN为小于1的值，则结果始终为空字符串。
+	12.匹配子串开始位置的函数
+	LOCATE(STR1,STR)、POSITION(STR1 IN STR)和INSTR(STR,STR1)三个函数的作用相同，返回字符串str1在str的开始位置
+	13.字符串逆序的函数REVERSE(S)
+	14.返回指定位置的字符串的函数ELT(N,字符串1,字符串2,字符串3...,字符串N)中，N为1,返回字符串1,n为2,返回字符串2,若指定的N大于字符串个数则返回NULL。
+	15.返回指定字符串位置的函数FIELD(s,s1,s2...)返回字符串s在列表中第一次出现的位置，找不到的情况下，返回0,如果s为NULL，返回值为0,原因是NULL不能同任何值进行同等比较。
+	16.返回子串位置的函数FIND_IT_SET(S1,S2)返回s1在s2的位置
+	若s1不在s2中或者s2为空字符串，返回值为0，任意一个参数为NULL时，返回值为NULL
+
+四.日期和时间函数
+	1.获取当前日期和获取当前时间的函数
+	CURDATE()和CURRENT_DATE():作用相同，将当前日期按照‘YYYY-MM-DD’或YYYYMMDD格式的值返回
+	CURTIME()和CURRENT_TIME()作用相同，将当前时间以‘HH：MM：SS’或HHMMSS格式的值哦返回。
+	2.获取当前日期和时间的函数
+	CURRENT_TIMESTAMP(),LOCALTIME(),NOW(),SYSDATE()作用相同，均返回当前日期和时间值，格式为‘YYYY-MM-DD HH：MM：SS’或YYYYMMDDHHMMSS
+	3.UNIX时间戳函数
+	UNIX_TIMESTAMP()将标准时间按返回一个格林尼治标准时间戳
+	FROM_UNIXTIME()与上面函数互为反函数。将时间戳转换为标准时间
+	4.返回UTC日期的函数和返回UTC时间的函数
+	UTC_DATE()返回当前UTC日期值
+	UTC_TIME()返回当前UTC时间值
+	5.获取月份的函数MONTH(DATE)和MONTHNAME(DATE)
+	返回date对应的月份值为1-12
+	返回date对应的月份英文全名。
+	6.获取星期的函数DAYNAME(D)和DAYOFWEEK(D),WEEKDAY(D)
+	DAYNAME返回对应的工作日的英文名称
+	DAYOFWEEK返回d对应的一周中的索引，1表示周日
+	WEEKDAY返回d对应的工作日索引0表示周一
+	7.获取星期数的函数WEEK(d)和WEEKOFYEAR(D)
+	第一个计算日期d是一年的第几周
+	第二个计算某天位与一年中的第几周
+	8.获取天数的函数DAYOFYEAR(D)和DAYOFMONTH(D)
+	第一个返回d是一年中的第几天，第二个返回的是一月中的第几天
+	9.获取年份、季度、小时、分钟和秒钟的函数
+	YEAR(DATE)返回对应的年份
+	QUARTER(DATE)返回对应的季度
+	MINUTE(DATE)返回对应的分钟数
+	SECOND(DATE)返回对应的秒数
+	10.获取日期的指定值的函数EXTRACT(TYPE FROM DATE)
+	11.SEC_TO_TIME(SECONDS)将秒值转换为时间格式
+	12.DATE_ADD，ADDDATE为日期加操作，DATE_SUB,SUBDATE为日期减操作
+	DATE_ADD和DATE_SUB在指定修改的时间段时，也可以指定负值，负值代表相减，返回以前的日期和时间。
+	DATEDIFF(DATE1,DATE2)返回起始时间date1和结束时间date2之间的天数。
+	13.将日期和时间格式化的函数
+	DATE_FORMAT(date，format)根据format指定的格式显示date值
+	TIME_FORMAT(time，format)根据format指定的格式显示time值
+	GET_FORMAT(val_type，format_type)返回日期时间字符串的显示格式
+
+五.条件判断函数
+	1.IF(expr,v1,v2)函数，若表达式expr为true，则返回v1,否则返回v2.
+	2.IFNULL(V1,V2)函数，如果v1不是NULL，则返回v1,否则返回为V2
+	3.CASE函数：case expr when v1 then r1 [when v2 then r2] [else rn] END
+	expr的值与v几相等返回对应的r几 如果所有都不想等，则返回ELSE后的值
+	case when v1 then r1[when v2 then r2] [else m] end 哪个v的值为TRUE时，返回对应的r，否则返回else后的值。
+
+六.系统信息函数
+	1.获取MySQL版本号，连接数和数据库名的函数
+	VERSION()返回MySQL服务器版本的字符串。
+	CONNECTION_ID()返回MySQL服务器当前链接的次数，每个连接都有各自唯一的ID
+	SHOW PROCESSLIST和SHOW FULL PROCESSLIST显示前100条的连接数，查看当前连接状态，第二个可以显示所有。
+	DATEBASE()和SCHEMA()返回使用utf8字符集的默认数据库名。
+	2.获取用户名的函数
+	USER(),CURRENT_USER()SYSTEM_USER()SESSION_USER()这几个函数返回当前被MySQL服务器验证的用户名和主机名组合
+	3.获取字符串的字符集和排序方式的函数
+	CHARSET(STR)返回字符串str自变量的字符集
+	COLLATION(STR)返回字符串str的字符排列方式
+	4.获取最后一个自动生成的ID值的函数
+	LAST_INSERT_ID()返回最后一个INSERT或UPDATE为AUTO_INCREMENT列设置的第一个发生的值。当使用一条INSERT插入多个值时，只返回插入的第一行的值。并且与表没有关系，先向a表插，再向b表插，返回值是b中的id
+
+七.加密函数
+	1.加密函数PASSWORD(STR)从原明文密码str计算并返回加密后的密码字符串，为null时返回NULL。加密是单项的。不应将它使用在个人的应用程序中。
+	2.加密函数MD5(str)为字符串计算出一个MD5 128比较校验和。该值以32位十六进制数字的二进制字符串形式返回，参数为NULL返回NULL。
+	3.加密函数ENCODE(str,pswd_str)使用PSWD_STR作为密码，加密str，使用DECODE()解密结果。结果是一个和str长度相同的二进制字符串
+	4.解密函数DECODE(crypt_str,pswd_str)使用pswd_str作为密码，解密加密过的CRYPT_STR字符串。
+
+八.其他函数
+	1.格式化函数FORMAT(X,N)将数字格式化，并以四舍五入的方式保留小数点后n位，结果以字符串的形式返回，n为0,结果不含小数部分。
+	2.不同进制的数字进行转换的函数
+	CONV(N,from_base,to_base)返回值为数值N的字符串，若有一个参数为NULL，则返回NULL
+	3.IP地址与数字相互转换的函数
+	INET_ATON()给出一个作为字符串的网络地址的点地址表示，返回一个代表该地址数值的整数。
+	INET_NTOA()与上面互为反函数。
+	4.加锁函数和解锁函数
+	GET_LOCK(STR,TIMEOUT)若成功得到锁返回1,操作超时返回0,出现错误返回NULL.
+	RELEASE_LOCK(STR)解开被上面函数用str命名的锁，若成功解锁返回1,若该线程尚为创建锁返回0,若命名的锁不存在返回NULL.
+	IS_FREE_LOCK(STR)检查名为str的锁是否可以使用，可以使用返回1，正在被使用返回0,出现错误返回NULL
+	IS_USED_LOCK(STR)检查名为str的锁是否正在被使用，若在被使用返回使用该锁的客户端的连接标识符，否则返回NULL.
+	5.重复执行指定操作的函数
+	BENCHMARK(COUNT,EXPR)重复执行表达式EXPR COUNT次。
+	6.改变字符集的函数
+	CONVERT(...using...)用来在不同的字符集之间转化数据
+	7.改变数据类型的函数
+	CAST(X, AS type)和CONVERT(x,type)将一个类型的值转换为另一个类型的值
